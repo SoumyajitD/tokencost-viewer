@@ -200,5 +200,6 @@ os.makedirs(static_dir, exist_ok=True)
 app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
 if __name__ == "__main__":
-    print("TokenCost v2.0 → http://127.0.0.1:8000")
-    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    print(f"TokenCost v2.0 → http://0.0.0.0:{port}")
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
