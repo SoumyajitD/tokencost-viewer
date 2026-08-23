@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TokenCost: The Definitive AI Model Pricing Index</title>
+  <meta name="description" content="Instantly compare request costs across Gemini, GPT-4o, Claude, and DeepSeek. Real-time tokenization, live exchange rates, zero guesswork.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css?v=2.8">
+</head>
+<body class="figma-surface">
+
+  <nav class="top-nav">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="/" class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect x="1" y="1" width="30" height="30" rx="8" fill="#000"/>
+            <path d="M16 6.5L18.8 13.2L25.5 16L18.8 18.8L16 25.5L13.2 18.8L6.5 16L13.2 13.2L16 6.5Z" fill="#fff"/>
+            <circle cx="23.5" cy="8.5" r="2.5" fill="#D2E823"/>
+          </svg>
+          <span class="brand-name">TokenCost</span>
+        </a>
+        <span class="nav-tag">PRICING INDEX</span>
+      </div>
+      <div class="nav-right">
+        <div class="currency-picker">
+          <i class="fa-solid fa-coins currency-icon"></i>
+          <select id="currencySelect" title="Currency">
+            <option value="INR" selected>INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="JPY">JPY (¥)</option>
+            <option value="CAD">CAD (CA$)</option>
+            <option value="AUD">AUD (A$)</option>
+          </select>
+        </div>
+        <span class="rate-badge" id="exchangeRateLabel">1 USD = ₹95.75</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- scrolling ticker -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>GEMINI 2.5 PRO</span><span class="dot">·</span>
+        <span>GPT-4O</span><span class="dot">·</span>
+        <span>CLAUDE 3.7 SONNET</span><span class="dot">·</span>
+        <span>DEEPSEEK R1</span><span class="dot">·</span>
+        <span>LLAMA 3.3 70B</span><span class="dot">·</span>
+        <span>MISTRAL LARGE 2</span><span class="dot">·</span>
+        <span>QWEN 2.5 72B</span><span class="dot">·</span>
+        <span>O3-MINI</span><span class="dot">·</span>
+        <span>CLAUDE 3.5 HAIKU</span>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <span>GEMINI 2.5 PRO</span><span class="dot">·</span>
+        <span>GPT-4O</span><span class="dot">·</span>
+        <span>CLAUDE 3.7 SONNET</span><span class="dot">·</span>
+        <span>DEEPSEEK R1</span><span class="dot">·</span>
+        <span>LLAMA 3.3 70B</span><span class="dot">·</span>
+        <span>MISTRAL LARGE 2</span><span class="dot">·</span>
+        <span>QWEN 2.5 72B</span><span class="dot">·</span>
+        <span>O3-MINI</span><span class="dot">·</span>
+        <span>CLAUDE 3.5 HAIKU</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="page-content">
+
+    <section class="hero-block">
+      <div class="eyebrow">REAL-TIME INTELLIGENCE</div>
+      <h1 class="display-xl">Know exactly what<br>every API call costs.</h1>
+      <p class="body-lg">Paste any prompt. See instant cost comparisons across 15 frontier models, tokenized in real time with live exchange rates.</p>
+    </section>
+
+    <!-- prompt input area -->
+    <section class="color-block-lime">
+      <div class="block-header">
+        <span class="block-eyebrow">YOUR PROMPT</span>
+        <span class="block-meta" id="promptMeta">0 characters · 0 tokens</span>
+      </div>
+      <textarea id="promptInput" class="figma-textarea" rows="4" placeholder="Paste any prompt, system instruction, or code snippet. Costs update instantly as you type..."></textarea>
+
+      <div class="samples-row">
+        <span class="pill-label">TRY:</span>
+        <button class="pill-btn sample-btn" data-text="Write a Python implementation of Manacher's Algorithm for finding the longest palindromic substring in O(N) linear time with full proofs.">Code Algorithm</button>
+        <button class="pill-btn sample-btn" data-text="Summarize the core financial highlights, revenue drivers, and risks from this quarterly software report for the board of directors.">Executive Brief</button>
+        <button class="pill-btn sample-btn" data-text="You are an empathetic customer support lead. Resolve a duplicate subscription charge on an invoice and confirm immediate refund processing.">Support Agent</button>
+      </div>
+
+      <!-- collapsible advanced settings -->
+      <details class="advanced-params">
+        <summary class="advanced-toggle">
+          <i class="fa-solid fa-sliders"></i>
+          Advanced Parameters
+          <i class="fa-solid fa-chevron-down toggle-chevron"></i>
+        </summary>
+        <div class="advanced-body">
+          <div class="param-group">
+            <label class="param-label" for="outputTokensInput">ESTIMATED OUTPUT TOKENS</label>
+            <div class="param-input-row">
+              <input type="number" id="outputTokensInput" class="param-input" value="500" min="0" max="128000">
+              <div class="preset-pills">
+                <button class="preset-pill" data-target="outputTokensInput" data-value="150">Short 150</button>
+                <button class="preset-pill active" data-target="outputTokensInput" data-value="500">Medium 500</button>
+                <button class="preset-pill" data-target="outputTokensInput" data-value="1000">Long 1K</button>
+                <button class="preset-pill" data-target="outputTokensInput" data-value="4000">XL 4K</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- headline numbers -->
+    <section class="results-section">
+      <div class="kpi-grid">
+        <div class="kpi-tile cream">
+          <span class="block-eyebrow">LOWEST COST</span>
+          <div class="kpi-value-row">
+            <span class="kpi-big" id="metricCheapest">₹0.00</span>
+            <span class="kpi-unit">/ request</span>
+          </div>
+          <p class="kpi-model" id="metricCheapestName">Gemini 2.5 Flash</p>
+          <p class="kpi-sub" id="metricCheapestSub">1,000 requests = ₹0.00</p>
+        </div>
+        <div class="kpi-tile lilac">
+          <span class="block-eyebrow">GPT-4o BASELINE</span>
+          <div class="kpi-value-row">
+            <span class="kpi-big" id="metricFlagship">₹0.00</span>
+            <span class="kpi-unit">/ request</span>
+          </div>
+          <p class="kpi-model" id="metricFlagshipName">GPT-4o</p>
+          <p class="kpi-sub" id="metricFlagshipSub">1,000 requests = ₹0.00</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- pricing table -->
+    <section class="table-section">
+      <div class="table-header-row">
+        <div>
+          <span class="eyebrow">CROSS-MODEL MATRIX</span>
+          <h2 class="display-lg" id="tableMainTitle">Full Pricing Breakdown</h2>
+        </div>
+        <span class="tally-pill" id="modelTally">15 Models</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th class="th-model">MODEL</th>
+              <th class="th-provider">PROVIDER</th>
+              <th class="col-right th-cost-1">1 REQUEST</th>
+              <th class="col-right th-cost-1k">1,000 REQUESTS</th>
+              <th class="col-center th-savings">VS GPT-4o</th>
+            </tr>
+          </thead>
+          <tbody id="matrixBody"></tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <span class="verified-label" id="pricingVerified">Pricing last verified: August 22, 2026</span>
+      </div>
+    </section>
+
+    <!-- insight callout -->
+    <section class="color-block-coral">
+      <span class="block-eyebrow">THE TAKEAWAY</span>
+      <h3 class="insight-title" id="insightHeading">Smarter routing slashes inference spend by over 95%.</h3>
+      <p class="insight-body" id="insightText">For high-throughput workloads, switching from flagship frontier models to cost-optimized alternatives lets you scale 25× more queries at the exact same budget.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-logo">TokenCost</span>
+        <p class="footer-tagline">The definitive cross-model tokenization and pricing benchmark for production AI.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-heading">COVERAGE</span>
+        <ul>
+          <li>Google Gemini 2.5</li>
+          <li>OpenAI GPT-4o, o3-mini, o1</li>
+          <li>Anthropic Claude 3.7 &amp; 3.5</li>
+          <li>DeepSeek V3 &amp; R1</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-heading">METHODOLOGY</span>
+        <ul>
+          <li>LiteLLM tokenization engine</li>
+          <li>Live exchange rates via API</li>
+          <li>Official provider pricing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 TokenCost. All rights reserved.</div>
+  </footer>
+
+  <script src="app.js?v=2.8"></script>
+</body>
+</html>

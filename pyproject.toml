@@ -1,0 +1,11 @@
+[project]
+name = "gemini-tokencost-viewer"
+version = "0.1.0"
+description = "AI Token Cost & Model Comparison Index"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "litellm>=1.83.0",
+    "uvicorn[standard]>=0.30.0",
+]
